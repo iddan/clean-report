@@ -12,6 +12,7 @@
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
+  "homepage": "https://iddan.github.io/clean-report/build",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
