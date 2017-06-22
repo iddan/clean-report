@@ -2,7 +2,6 @@
   "files.exclude": {
     "node_modules": "explorerExcludedFiles",
     "coverage": "explorerExcludedFiles",
-    "build": "explorerExcludedFiles",
     ".DS_Store": "explorerExcludedFiles",
     ".env.local": "explorerExcludedFiles",
     ".env.development.local": "explorerExcludedFiles",
