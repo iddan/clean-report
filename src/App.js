@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import ReactCountdownClock from 'react-countdown-clock';
-import Recorder from 'react-recorder';
 
 import trash from './icons/trash.svg';
 import toiletPaper from './icons/toilet-paper.svg';
@@ -11,8 +9,6 @@ import toilet from './icons/toilet.svg';
 import happy from './icons/happy.svg';
 import confused from './icons/confused.svg';
 import yelling from './icons/yelling.svg';
-
-import microphone from './icons/microphone.svg';
 
 const StyledApp = styled.div`
   max-width: 75vh;
@@ -81,12 +77,6 @@ const Button = styled.button`
   }
 `;
 
-const MicrophoneIcon = styled.img`
-  width: 6rem !important;
-`;
-
-const cell = prompt('הקלד.י את מיקום תא השירותים');
-
 class App extends Component {
 
   state = {
@@ -109,6 +99,7 @@ class App extends Component {
   }
 
   render() {
+    const { cell } = this.props;
     const { smallTiles, largeTile } = this.state;
     return (
       <StyledApp>
@@ -135,32 +126,34 @@ class App extends Component {
         <p>מצב השירותים (בחר.י אחד)</p>
         <Row>
           <Tile background="#00E676" selected={ largeTile === 'good' } onClick={ this.setLargeTile('good') }>
-            <img src={ happy } style={{ width: '100%' }} />
+            <img alt="" src={ happy } style={{ width: '100%' }} />
             <span>מצב תקין</span>
           </Tile>
           <Tile background="#FFFF8D" selected={ largeTile === 'medium' } onClick={ this.setLargeTile('medium') }>
-            <img src={ confused } style={{ width: '100%' }} />
+            <img alt="" src={ confused } style={{ width: '100%' }} />
             <span>המצב סביר</span>
           </Tile>
           <Tile background="#FF5252" selected={ largeTile === 'bad' } onClick={ this.setLargeTile('bad') }>
-            <img src={ yelling } style={{ width: '100%' }} />
+            <img alt="" src={ yelling } style={{ width: '100%' }} />
             <span>מצב בכי רע</span>
           </Tile>
         </Row>
         <Row>
-            <Button disabled={ !(this.state.largeTile || this.state.smallTiles.length) }
-                    onClick={ () => {
-                      this.setState({
-                        selectedSmallTile: null,
-                        smallTiles: [],
-                        largeTile: null
-                      });
-                      window.emailjs.send('gmail', 'template_kGJ4Ohy9', {
-                        cell,
-                        mood: this.state.largeTile,
-                        problem: this.state.smallTiles.join(', '),
-                      });
-                    } }>שליחה</Button>
+          <Button disabled={ !(largeTile || smallTiles.length) }
+                  onClick={ () => {
+                    this.setState({
+                      selectedSmallTile: null,
+                      smallTiles: [],
+                      largeTile: null
+                    });
+                    window.emailjs.send('gmail', 'template_kGJ4Ohy9', {
+                      cell,
+                      mood: largeTile,
+                      problem: smallTiles.join(', '),
+                    });
+                  } }>
+            שליחה
+          </Button>
         </Row>
       </StyledApp>
     );
