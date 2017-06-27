@@ -101,6 +101,11 @@ class App extends Component {
   render() {
     const { cell } = this.props;
     const { smallTiles, largeTile } = this.state;
+    if (!cell) {
+      return (
+        <span>מידע על התא חייב להיות מצויין בשורת הכתובת (תחת הפרמטר cell)</span>
+      );
+    }
     return (
       <StyledApp>
         <p>בעיות (בחר.י אחת או יותר אם יש)</p>
